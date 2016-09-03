@@ -30,7 +30,7 @@ var inquire = require('inquirer');
 //command line                            |  
 var command = process.argv[2];  		//|
 // console.log(command); 			    //|
-var results ;               			//|
+var warning ;               			//|
 	              					    //|     
    									    //|
 //=========================================>>>>
@@ -49,37 +49,43 @@ switch(command){
       			console.log(error);
       		
     	}
-    			console.log("Your last 20 tweets:")
+    			console.log("My last 20 tweets:")
     		for (i = 0; i < 20; i++){
       			console.log("My last Tweetes are: " + tweets[i].text);
 			
 		}
 	});
-
-
-
-	
 		break;
 //===================================================================================>>
 //Spotify: 
 	case 'spotify-this-song':
+	console.log("where is my music?");
+	spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+ 
+    // Do something with 'data' 
+});
 	
 		break;
 //===================================================================================>>		
 //IMDB Movie
 	case 'movie-this':
+	console.log("where is my movie");
 	
 		break;
 //===================================================================================>>
 // do-what-it-says
 	case 'do-what-it-says':
+	console.log("Dooo");
 
 		break;
 //===================================================================================>>
 //default
 	default: 
-	results = 'Please write: my-tweets, spotify-this-song, movie-this or do-what-it-says';
-
+	warning = 'Please write: my-tweets, spotify-this-song, movie-this or do-what-it-says';
 
 };
 
