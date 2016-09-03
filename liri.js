@@ -2,7 +2,7 @@
 //VARIABLES USED.
 //Accessing keys.js.
 var keys = require('./keys.js');
-console.log(keys);
+// console.log(keys);
 //requiring twitter's npm.  
 var Twitter = require('twitter');
 // console.log(Twitter)
@@ -28,7 +28,9 @@ var inquire = require('inquirer');
 
 //=========================================>>>
 //command line                            |  
-var command = process.argv[2];          //|
+var command = process.argv[2];  		//|
+// console.log(command); 			    //|
+var results ;               			//|
 	              					    //|     
    									    //|
 //=========================================>>>>
@@ -37,44 +39,53 @@ var command = process.argv[2];          //|
 //Applying Switch
 switch(command){
 	case 'my-tweets':
-	// var client = new Twitter({
- //  		consumer_key: process.env.TWITTER_CONSUMER_KEY,
- //  		consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
- //  		access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
- //  		access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
- //  		// console.log(client);
-// });
-//Twitter
-		var client = new Twitter(keys.Twitterkeys);
+	console.log("where are my tweets");
+	//Twitter
+		var client = new Twitter(keys.twitterKeys);
 		// console.log(client);
-		var params = {screen_name: 'nodejs'};
-		client.get('statuses/user_timeline', params, function(errors, tweets, response){
-			//If an error never occurred 
-			if(!errors){
-					//for loop to grab max of 20 tweet.
-					for (var i = 0; i < 20; i++){
-						console.log("I Wrote: " + tweets[i].text + '\n');
-						console.log('_____________________________');
-						console.log(tweets);
-						console.log(params);
+		var params = {screen_name: 'Lui_SantanaQ'};
+		client.get('statuses/user_timeline', function(error, tweets, response){
+    		if(error) {
+      			console.log(error);
+      		
+    	}
+    			console.log("Your last 20 tweets:")
+    		for (i = 0; i < 20; i++){
+      			console.log("My last Tweetes are: " + tweets[i].text);
+			
 		}
-	}
+	});
 
-});
+
+
+	
 		break;
 //===================================================================================>>
 //Spotify: 
 	case 'spotify-this-song':
 	
 		break;
+//===================================================================================>>		
+//IMDB Movie
 	case 'movie-this':
 	
 		break;
-	case '':
+//===================================================================================>>
+// do-what-it-says
+	case 'do-what-it-says':
 
 		break;
+//===================================================================================>>
+//default
+	default: 
+	results = 'Please write: my-tweets, spotify-this-song, movie-this or do-what-it-says';
+
 
 };
+
+
+
+
 
 
 
