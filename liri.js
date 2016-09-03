@@ -19,7 +19,7 @@ var fs = require('fs');
 var inquire = require('inquirer');
 // console.log(inquire)
 // Using fs to readFile and appendFile.
-	fs.readFile("keys.js", "utf8", function(error, data) {
+	fs.readFile("random.text", "utf8", function(error, data) {
 		var dataArr = data.split(',');
 		// console.log(dataArr);
 	});
@@ -30,7 +30,8 @@ var inquire = require('inquirer');
 //command line                            |  
 var command = process.argv[2];  		//|
 // console.log(command); 			    //|
-var warning ;               			//|
+var warning ; 							//| 
+var songs = process.argv[3];    	//|
 	              					    //|     
    									    //|
 //=========================================>>>>
@@ -38,9 +39,10 @@ var warning ;               			//|
 
 //Applying Switch
 switch(command){
+//Twitter
 	case 'my-tweets':
 	console.log("where are my tweets");
-	//Twitter
+
 		var client = new Twitter(keys.twitterKeys);
 		// console.log(client);
 		var params = {screen_name: 'Lui_SantanaQ'};
@@ -60,7 +62,8 @@ switch(command){
 //Spotify: 
 	case 'spotify-this-song':
 	console.log("where is my music?");
-	spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+
+	spotify.search({ type: 'track', query: songs }, function(err, data) {
     if ( err ) {
         console.log('Error occurred: ' + err);
         return;
