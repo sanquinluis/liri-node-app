@@ -60,7 +60,7 @@ switch(command){
         console.log('Error occurred: ' + err);
         return;
     }else{
-    	for(var i = 0; i < 15; i++){
+    	for(var i = 0; i < 10; i++){
     		var musicfound = data.tracks.items[i];
     		// console.log(musicfound);
     		//The name of the Artist
@@ -88,15 +88,22 @@ switch(command){
 // do-what-it-says
 	case 'do-what-it-says':
 	console.log("Dooo");
-// 	if(){
+	//fs files is reading random.text
+	fs.readFile("random.text", "utf8", function(error, data) {
+		//splits the data received.
+		var dataA = data.split(',');
+		//array data.
+			parametorOne = dataA[0];
+			parametorTwo = dataA[1];
 
-// 	}else{
-// 	//Using fs to readFile.
-// 	fs.readFile("random.text", "utf8", function(error, data) {
-// 		var dataArr = data.split(',');
-// 	 	console.log(dataArr);
-// 	});
-// };
+		if(error){
+			console.log(error);
+		}else{
+		console.log(parametorOne);
+		}
+	});
+		
+
 
 		break;
 //===================================================================================>>
