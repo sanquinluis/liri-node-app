@@ -66,14 +66,18 @@ switch(command){
     	for(var i = 0; i < 15; i++){
     		var musicfound = data.tracks.items[i];
     		// console.log(musicfound);
+    		//The name of the Artist
     		console.log("The Artist is: " + musicfound.artists[0].name);
+    		//The name of the song
     		console.log("The Song is: " + musicfound.name);
+    		//The url of the song
     		console.log("The source is: " + musicfound.external_urls.spotify);
+    		//The name of the album
     		console.log("The album is " + musicfound.album.name);
 
     	}
     }	
-    // Do something with 'data' 
+    
 });
 	
 		break;
