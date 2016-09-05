@@ -2,28 +2,23 @@
 //VARIABLES USED.
 //Accessing keys.js.
 var keys = require('./keys.js');
-// console.log(keys);
 //requiring twitter's npm.  
 var Twitter = require('twitter');
-// console.log(Twitter)
 //requiring spotify npm
 var spotify = require('spotify');
-// console.log(spotify)
 //requiring request(omdB movies) npm.
 var request = require('request');
-// console.log(request)
 //requiring file system npm.
 var fs = require('fs');
-// console.log(fs)
 //requiring inquire npm.
 var inquire = require('inquirer');
 // console.log(inquire)
 // Using fs to readFile and appendFile.
-	fs.readFile("random.text", "utf8", function(error, data) {
-		var dataArr = data.split(',');
-		// console.log(dataArr);
-	});
-	// fs.appendFile("", "utf8", function(error,data){
+	// fs.readFile("random.text", "utf8", function(error, data) {
+	// 	var dataArr = data.split(',');
+	 	// console.log(dataArr);
+	// });
+	// // fs.appendFile("", "utf8", function(error,data){
 	// });
 
 //=========================================>>>
@@ -31,7 +26,7 @@ var inquire = require('inquirer');
 var command = process.argv[2];  		//|
 // console.log(command); 			    //|
 var warning ; 							//| 
-var songs = process.argv[3];    	//|
+var songs = process.argv[3];    	    //|
 	              					    //|     
    									    //|
 //=========================================>>>>
@@ -62,13 +57,22 @@ switch(command){
 //Spotify: 
 	case 'spotify-this-song':
 	console.log("where is my music?");
-
+//from spotify npm site.
 	spotify.search({ type: 'track', query: songs }, function(err, data) {
     if ( err ) {
         console.log('Error occurred: ' + err);
         return;
-    }
- 
+    }else{
+    	for(var i = 0; i < 15; i++){
+    		var musicfound = data.tracks.items[i];
+    		// console.log(musicfound);
+    		console.log("The Artist is: " + musicfound.artists[0].name);
+    		console.log("The Song is: " + musicfound.name);
+    		console.log("The source is: " + musicfound.external_urls.spotify);
+    		console.log("The album is " + musicfound.album.name);
+
+    	}
+    }	
     // Do something with 'data' 
 });
 	
