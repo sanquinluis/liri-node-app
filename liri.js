@@ -13,11 +13,7 @@ var fs = require('fs');
 //requiring inquire npm.
 var inquire = require('inquirer');
 // console.log(inquire)
-// Using fs to readFile and appendFile.
-	// fs.readFile("random.text", "utf8", function(error, data) {
-	// 	var dataArr = data.split(',');
-	 	// console.log(dataArr);
-	// });
+
 	// // fs.appendFile("", "utf8", function(error,data){
 	// });
 
@@ -47,6 +43,7 @@ switch(command){
       		
     	}
     			console.log("My last 20 tweets:")
+    			//A for loop that will grab 20 tweets.
     		for (i = 0; i < 20; i++){
       			console.log("My last Tweetes are: " + tweets[i].text);
 			
@@ -91,12 +88,21 @@ switch(command){
 // do-what-it-says
 	case 'do-what-it-says':
 	console.log("Dooo");
+// 	if(){
+
+// 	}else{
+// 	//Using fs to readFile.
+// 	fs.readFile("random.text", "utf8", function(error, data) {
+// 		var dataArr = data.split(',');
+// 	 	console.log(dataArr);
+// 	});
+// };
 
 		break;
 //===================================================================================>>
 //default
 	default: 
-	warning = 'Please write: my-tweets, spotify-this-song, movie-this or do-what-it-says';
+	console.log('Please write: my-tweets, spotify-this-song, movie-this or do-what-it-says.Thanks!');
 
 };
 
