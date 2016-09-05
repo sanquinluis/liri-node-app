@@ -2,15 +2,15 @@
 //VARIABLES USED.
 //Accessing keys.js.
 var keys = require('./keys.js');
-//requiring twitter's npm.  
+//Requiring twitter's npm.  
 var Twitter = require('twitter');
-//requiring spotify npm
+//Requiring spotify npm
 var spotify = require('spotify');
-//requiring request(omdB movies) npm.
+//Requiring request(omdB movies) npm.
 var request = require('request');
-//requiring file system npm.
+//Requiring file system npm.
 var fs = require('fs');
-//requiring inquire npm.
+//Requiring inquire npm.
 var inquire = require('inquirer');
 // console.log(inquire)
 
@@ -20,9 +20,8 @@ var inquire = require('inquirer');
 //=========================================>>>
 //command line                            |  
 var command = process.argv[2];  		//|
-// console.log(command); 			    //|
-var warning ; 							//| 
-var songs = process.argv[3];    	    //|
+// console.log(command); 			    //|							
+var results = process.argv[3];    	    //|
 	              					    //|     
    									    //|
 //=========================================>>>>
@@ -47,15 +46,15 @@ switch(command){
     		for (i = 0; i < 20; i++){
       			console.log("My last Tweetes are: " + tweets[i].text);
 			
-		}
-	});
+	}
+});
 		break;
 //===================================================================================>>
 //Spotify: 
 	case 'spotify-this-song':
 	console.log("where is my music?");
-//from spotify npm site.
-	spotify.search({ type: 'track', query: songs }, function(err, data) {
+//From spotify npm site.
+	spotify.search({ type: 'track', query: results }, function(err, data) {
     if ( err ) {
         console.log('Error occurred: ' + err);
         return;
@@ -82,34 +81,90 @@ switch(command){
 //IMDB Movie
 	case 'movie-this':
 	console.log("where is my movie");
+	var movieSearch = 'http://www.omdbapi.com/?t=' + results + '&y=&plot=short&tomatoes=true&r=json';
+	var MrNoBody = 'http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&tomatoes=true&r=json';
+
+	if(results === undefined){
+		request(MrNoBody,function (error, response, body) {
+       		if (!error && response.statusCode == 200) {
+              	//Title of the movie
+              	console.log("The movie: " + JSON.parse(body)["Title"]);
+              	//Year created
+              	console.log("Year created: " + JSON.parse(body)["Year"]);
+              	//IMDB rating
+              	console.log("IMDB Rating: " + JSON.parse(body)["imdbRating"]);
+              	//Country origin
+              	console.log("Country of Origin: " + JSON.parse(body)["Country"]);
+              	//Language origin
+              	console.log("Language of the movie: " + JSON.parse(body)["Language"]);
+              	//Plot
+              	console.log("The Plot: " + JSON.parse(body)["Plot"]);
+              	//Actors in this movie
+              	console.log("Actors: " + JSON.parse(body)["Actors"]);
+              	//Rotten Tomatoes rating
+              	console.log("Rotten Tomatoes Rating: " + JSON.parse(body)["tomatoRating"]);
+              	//Source of Rotten Tomatoes
+              	console.log("Rotten Tomatoes source: " + JSON.parse(body)["tomatoURL"]);
+            } 
+	});
+		
+	} else {
+        request(movieSearch, function (error, response, body) {	
+      		if (!error && response.statusCode == 200) {
+              	//Title of the movie
+              	console.log("The movie: " + JSON.parse(body)["Title"]);
+              	//Year created
+              	console.log("Year created: " + JSON.parse(body)["Year"]);
+            	//IMDB rating
+              	console.log("IMDB Rating: " + JSON.parse(body)["imdbRating"]);
+              	//Country origin
+              	console.log("Country of Origin: " + JSON.parse(body)["Country"]);
+              	//Language origin
+              	console.log("Language of the movie: " + JSON.parse(body)["Language"]);
+              	//Plot
+              	console.log("The Plot: " + JSON.parse(body)["Plot"]);
+              	//Actors in this movie
+              	console.log("Actors: " + JSON.parse(body)["Actors"]);
+              	//Rotten Tomatoes rating
+              	console.log("Rotten Tomatoes Rating: " + JSON.parse(body)["tomatoRating"]);
+              //Source of Rotten Tomatoes
+              	console.log("Rotten Tomatoes source: " + JSON.parse(body)["tomatoURL"]);
+            	};	
+      		});
+			
+        };
+
+	
 	
 		break;
 //===================================================================================>>
 // do-what-it-says
 	case 'do-what-it-says':
-	console.log("Dooo");
+			console.log("Dooo");
+	
 	//fs files is reading random.text
 	fs.readFile("random.text", "utf8", function(error, data) {
+		function dataA(){
+
+		}
 		//splits the data received.
 		var dataA = data.split(',');
 		//array data.
-			parametorOne = dataA[0];
-			parametorTwo = dataA[1];
+			parameOne = dataA[0];
+			parameTwo = dataA[1];
 
 		if(error){
 			console.log(error);
 		}else{
-		console.log(parametorOne);
+			console.log(parametorOne);
 		}
 	});
-		
-
-
+	return;
 		break;
 //===================================================================================>>
 //default
 	default: 
-	console.log('Please write: my-tweets, spotify-this-song, movie-this or do-what-it-says.Thanks!');
+			console.log('Please write: my-tweets, spotify-this-song, movie-this or do-what-it-says.Thanks!');
 
 };
 
